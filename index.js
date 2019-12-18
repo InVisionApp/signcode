@@ -98,7 +98,8 @@ function spawnSign (options, callback) {
     spawnOptions.stdio = ['ignore', 'ignore', 'pipe']
   }
 
-  var signcode = ChildProcess.spawn(getSigncodePath(), args, spawnOptions)
+  var osslsigncodeBin = options.osslsigncodeBin || getSigncodePath()
+  var signcode = ChildProcess.spawn(osslsigncodeBin, args, spawnOptions)
 
   var stderr = ''
   signcode.stderr.on('data', function (data) {
@@ -144,7 +145,8 @@ function spawnVerify (options, callback) {
     )
   }
 
-  var signcode = ChildProcess.spawn(getSigncodePath(), args)
+  var osslsigncodeBin = options.osslsigncodeBin || getSigncodePath()
+  var signcode = ChildProcess.spawn(osslsigncodeBin, args)
 
   var stdout = ''
   signcode.stdout.on('data', function (data) {

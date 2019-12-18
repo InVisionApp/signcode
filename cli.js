@@ -18,7 +18,8 @@ function sign (argv) {
     overwrite: true,
     password: argv.password,
     path: path.resolve(argv.file_to_sign),
-    site: argv.url
+    site: argv.url,
+    osslsigncodeBin: argv.osslsigncode_bin
   }
 
   if (argv.prompt) {
@@ -96,7 +97,11 @@ function processCommand () {
         alias: 'u',
         describe: 'Application URL',
         type: 'string'
-      }
+      },
+      osslsigncode_bin: {
+        describe: 'Path to a osslsigncode binary (on Mac by default it uses a builtin bin)',
+        type: 'string'
+      },
     }, sign)
     .command('verify <file_to_verify> [args]', 'verify the signature on an executable', {
       hash: {
